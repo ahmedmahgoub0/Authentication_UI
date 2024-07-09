@@ -25,6 +25,7 @@ import com.example.identityproject.ui.theme.WhiteColor
 
 @Composable
 fun SegmentControls(
+    enabled: Boolean = true,
     onChangeGander: (String) -> Unit
 ) {
     val index = remember { mutableStateOf(0) }
@@ -49,10 +50,11 @@ fun SegmentControls(
             .background(
                 color = if (index.value == 0) LightPrimaryBrandColor else MaterialTheme.colorScheme.surface
             )
-            .clickable {
+            .then(if (enabled) Modifier.clickable {
                 index.value = 0
                 onChangeGander("male")
-            }) {
+            } else Modifier)
+        ) {
             Text(
                 modifier = Modifier.padding(vertical = 12.dp),
                 text = genderItems.first(),
@@ -68,10 +70,11 @@ fun SegmentControls(
                 .background(
                     color = if (index.value == 1) LightPrimaryBrandColor else MaterialTheme.colorScheme.surface
                 )
-                .clickable {
+                .then(if (enabled) Modifier.clickable {
                     index.value = 1
                     onChangeGander("female")
-                }) {
+                } else Modifier)
+        ) {
             Text(
                 modifier = Modifier.padding(vertical = 12.dp),
                 text = genderItems.last(),

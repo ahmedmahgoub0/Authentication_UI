@@ -147,7 +147,8 @@ fun LoginContent(
             NavigateToAnotherScreen(
                 hintText = R.string.navigate_to_signup,
                 navigateText = R.string.sign_up,
-                onNavigate = onNavigate
+                onNavigate = onNavigate,
+                enabled = !state.isLoading
             )
 
         }

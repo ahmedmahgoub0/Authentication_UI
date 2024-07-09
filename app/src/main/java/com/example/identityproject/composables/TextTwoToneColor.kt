@@ -24,7 +24,8 @@ import com.example.identityproject.ui.theme.mediumCaption
 fun TextTwoToneColor(
     firstText: String,
     secondText: String,
-    navigate: () -> Unit
+    navigate: () -> Unit,
+    enabled: Boolean = true
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -44,7 +45,7 @@ fun TextTwoToneColor(
             style = MaterialTheme.typography.mediumCaption,
             modifier = Modifier
                 .wrapContentSize()
-                .noRippleClickable { navigate() },
+                .then(if (enabled) Modifier.noRippleClickable { navigate() } else Modifier),
             textAlign = TextAlign.Center
         )
     }

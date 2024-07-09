@@ -141,7 +141,10 @@ private fun SignupBirthdateAndGanderContent(
         //onDateChange = onChangeBirthdate
         //)
 
-        DatePickerField(birthDate = state.birthdate) {
+        DatePickerField(
+            birthDate = state.birthdate,
+            enabled = !state.isLoading
+        ) {
             calendarState.show()
         }
 
@@ -157,6 +160,7 @@ private fun SignupBirthdateAndGanderContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         SegmentControls(
+            enabled = !state.isLoading,
             onChangeGander = onChangeGender
         )
 
@@ -164,10 +168,10 @@ private fun SignupBirthdateAndGanderContent(
 
         AuthButton(
             onClick = onCreateAccount,
+            isEnabled = !state.isLoading,
             buttonModifier = Modifier
                 .padding(horizontal = 8.dp)
                 .fillMaxWidth(),
-            isEnabled = true,
             text = stringResource(id = R.string.create_account_label),
         )
 
@@ -188,7 +192,8 @@ private fun SignupBirthdateAndGanderContent(
         NavigateToAnotherScreen(
             hintText = R.string.navigate_to_login,
             navigateText = R.string.log_in,
-            onNavigate = onNavigate
+            onNavigate = onNavigate,
+            enabled = !state.isLoading
         )
     }
 
@@ -207,6 +212,7 @@ private fun SignupBirthdateAndGanderContent(
 @Composable
 fun DatePickerField(
     birthDate: String,
+    enabled: Boolean = true,
     showDatePicker: () -> Unit,
 ) {
     Row(
@@ -233,9 +239,7 @@ fun DatePickerField(
             tint = MaterialTheme.colorScheme.onSecondary,
             modifier = Modifier
                 .padding(16.dp)
-                .clickable {
-                    showDatePicker()
-                }
+                .then(if (enabled) Modifier.clickable { showDatePicker() } else Modifier)
         )
     }
 }

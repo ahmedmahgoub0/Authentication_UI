@@ -12,11 +12,13 @@ import androidx.compose.ui.unit.dp
 fun NavigateToAnotherScreen(
     hintText: Int,
     navigateText: Int,
+    enabled: Boolean = true,
     onNavigate: () -> Unit
 ) {
     Column {
         Spacer(Modifier.height(8.dp))
         TextTwoToneColor(
+            enabled = enabled,
             firstText = stringResource(id = hintText),
             secondText = stringResource(id = navigateText),
             navigate = onNavigate

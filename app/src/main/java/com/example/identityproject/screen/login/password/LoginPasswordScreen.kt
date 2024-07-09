@@ -33,7 +33,6 @@ import com.example.identityproject.composables.PasswordInputText
 import com.example.identityproject.main.navigateToHome
 import com.example.identityproject.screen.login.LoginUIState
 import com.example.identityproject.screen.login.LoginViewModel
-import com.example.identityproject.screen.login.isEnabled
 import com.example.identityproject.screen.signup.email.navigateToSignupEmail
 
 @Composable
@@ -102,6 +101,7 @@ fun LogInPasswordContent(
 
             Spacer(Modifier.height(14.dp))
             PasswordInputText(
+                enabled = !state.isLoading,
                 placeHolder = stringResource(id = R.string.password_place_holder),
                 text = state.password,
                 onTextChange = onChangePassword,
@@ -110,7 +110,7 @@ fun LogInPasswordContent(
             Spacer(modifier = Modifier.height(24.dp))
             AuthButton(
                 onClick = onLogin,
-                isEnabled = state.isEnabled(),
+                isEnabled = onValidate() && !state.isLoading,
                 text = stringResource(id = R.string.log_in),
                 buttonModifier = Modifier
                     .fillMaxWidth()
@@ -132,7 +132,8 @@ fun LogInPasswordContent(
             NavigateToAnotherScreen(
                 hintText = R.string.navigate_to_signup,
                 navigateText = R.string.sign_up,
-                onNavigate = onNavigate
+                onNavigate = onNavigate,
+                enabled = !state.isLoading
             )
 
         }

@@ -38,6 +38,7 @@ fun PasswordInputText(
     text: String,
     placeHolder: String,
     match: Boolean = false,
+    enabled: Boolean = true,
     onTextChange: (String) -> Unit,
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
@@ -49,6 +50,7 @@ fun PasswordInputText(
             .padding(horizontal = 8.dp),
         value = text,
         onValueChange = onTextChange,
+        enabled = enabled,
         shape = RoundedCornerShape(size = 100.dp),
         visualTransformation = if (passwordVisible) {
             VisualTransformation.None
@@ -72,6 +74,7 @@ fun PasswordInputText(
         colors = TextFieldDefaults.textFieldColors(
             containerColor = MaterialTheme.colorScheme.surface,
             focusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             unfocusedTextColor = MaterialTheme.colorScheme.onPrimary
         ),
